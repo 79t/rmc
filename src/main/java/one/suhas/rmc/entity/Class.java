@@ -2,7 +2,6 @@ package one.suhas.rmc.entity;
 
 
 import jakarta.persistence.*;
-
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(name = "uniqueCLass", columnNames = {"className"}))
 public class Class {

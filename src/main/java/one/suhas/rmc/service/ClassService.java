@@ -9,9 +9,12 @@ import java.util.List;
 
 @Service
 public class ClassService {
-    @Autowired
-    private ClassRepository classRepository;
+    private final ClassRepository classRepository;
 
+    @Autowired
+    public ClassService(ClassRepository classRepository) {
+        this.classRepository = classRepository;
+    }
     public List<Class> getAllClasses() {
         return classRepository.findAll();
     }
@@ -19,5 +22,7 @@ public class ClassService {
     public Class addClass(String className) {
         return classRepository.save(new Class(className));
     }
+
+    public Class getById(long id) { return classRepository.findById(id); }
 
 }
