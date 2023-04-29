@@ -3,23 +3,21 @@ package one.suhas.rmc.entity;
 
 import jakarta.persistence.*;
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(name = "uniqueCLass", columnNames = {"className"}))
-public class Class {
+public class RMCClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "className", nullable = false)
     private String className;
 
-    protected Class() {}
+    protected RMCClass() {}
 
-    public Class(String className) {
+    public RMCClass(String className) {
         this.className = className;
     }
 
     @Override
     public String toString() {
-        return String.format("Class[id=%d, className=%s]", this.id, this.className);
+        return String.format("RMCClass[id=%d, className=%s]", this.id, this.className);
     }
 
     public Long getId() {

@@ -1,6 +1,6 @@
 package one.suhas.rmc.service;
 
-import one.suhas.rmc.entity.Class;
+import one.suhas.rmc.entity.RMCClass;
 import one.suhas.rmc.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +15,14 @@ public class ClassService {
     public ClassService(ClassRepository classRepository) {
         this.classRepository = classRepository;
     }
-    public List<Class> getAllClasses() {
+    public List<RMCClass> getAllClasses() {
         return classRepository.findAll();
     }
 
-    public Class addClass(String className) {
-        return classRepository.save(new Class(className));
+    public RMCClass addClass(String className) {
+        return classRepository.save(new RMCClass(className));
     }
 
-    public Class getById(long id) { return classRepository.findById(id); }
+    public RMCClass getById(long id) { return classRepository.findById(id); }
 
 }
