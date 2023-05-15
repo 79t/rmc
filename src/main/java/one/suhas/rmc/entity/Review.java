@@ -1,16 +1,25 @@
 package one.suhas.rmc.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import one.suhas.rmc.enums.StarValue;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@EntityListeners(AuditingEntityListener.class)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "rmcClass_id")
+    @JsonBackReference
     private RMCClass rmcClass;
 
     private StarValue interesting;
@@ -20,7 +29,9 @@ public class Review {
 
     private StarValue exams;
 
-    public Review(long id, RMCClass rmcClass, StarValue interesting, StarValue hard, StarValue homework, StarValue exams) {
+    @CreatedDate
+    private LocalDateTime createdDate;
+    public Review(long id, RMCClass rmcClass,  StarValue interesting, StarValue hard, StarValue homework, StarValue exams) {
         this.id = id;
         this.rmcClass = rmcClass;
         this.interesting = interesting;
@@ -43,11 +54,14 @@ public class Review {
 
     public StarValue getExams() { return exams; }
 
+    public LocalDateTime getCreatedDate() { return createdDate;}
+
     public void setInteresting(StarValue n) { interesting = n; }
     public void setHard(StarValue n) { hard = n; }
     public void setHomework(StarValue n) { homework = n; }
     public void setExams(StarValue n) { exams = n; }
 
+    public void setCreatedDate(LocalDateTime d) { createdDate = d;}
 
 
 }

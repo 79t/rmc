@@ -1,11 +1,13 @@
 package one.suhas.rmc.controller;
 
 import one.suhas.rmc.entity.RMCClass;
+import one.suhas.rmc.entity.Review;
 import one.suhas.rmc.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class ClassController {
@@ -30,5 +32,9 @@ public class ClassController {
     public RMCClass getClassById(@PathVariable("class") long id) {
         return classService.getById(id);
     }
+
+    @GetMapping("/classes/{class}/reviews")
+    public Set<Review> getClassReviews(@PathVariable("class") long id) { return classService.getClassReviews(id); }
+
 
 }

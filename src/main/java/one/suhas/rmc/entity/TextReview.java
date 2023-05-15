@@ -3,6 +3,8 @@ package one.suhas.rmc.entity;
 import jakarta.persistence.Entity;
 import one.suhas.rmc.enums.StarValue;
 
+import java.util.Date;
+
 @Entity
 public class TextReview extends Review {
     private String reviewText;
