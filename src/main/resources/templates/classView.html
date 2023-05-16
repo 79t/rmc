@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h1 th:text="'info for class' + ' ' + ${class.getClassName()}"></h1>
+  <h2>Ratings</h2>
+  <div th:each="re: ${reviews}">
+    <h3 th:text="'rating from ' + ${#temporals.format(re.getCreatedDate(), 'MMM dd yyyy')}"></h3>
+    <ul>
+      <li th:text="'exam difficulty - ' + ${starValueToString.get(re.getExams())}"></li>
+      <li th:text="'homework difficulty - ' + ${starValueToString.get(re.getHomework())}"></li>
+      <li th:text="'interestingness - ' + ${starValueToString.get(re.getInteresting())}"></li>
+      <li th:text="'general difficulty - ' + ${starValueToString.get(re.getHard())}"></li>
+    </ul>
+  </div>
+  <h2>Reviews</h2>
+  <div th:each="tr : ${trs}">
+    <h3 th:text="'review from ' + ${#temporals.format(tr.getCreatedDate(), 'MMM dd yyyy')}"></h3>
+    <ul>
+      <li th:text="'exam difficulty - ' + ${starValueToString.get(tr.getExams())}"></li>
+      <li th:text="'homework difficulty - ' + ${starValueToString.get(tr.getHomework())}"></li>
+      <li th:text="'interestingness - ' + ${starValueToString.get(tr.getInteresting())}"></li>
+      <li th:text="'general difficulty - ' + ${starValueToString.get(tr.getHard())}"></li>
+    </ul>
+    <p><b>Review - </b> <span th:text="${tr.getReviewText()}"></span> </p>
+  </div>
+</body>
+</html>

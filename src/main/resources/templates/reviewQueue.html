@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ReviewQueue</title>
+</head>
+<body>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+
+    <h1>Review Queue</h1>
+    <h2 th:text="'Review from ' + ${#temporals.format(review.getCreatedDate(), 'MMM dd yyyy')}"></h2>
+    <p th:text="'Review Text -' + ${review.getReviewText()}"></p>
+    <button hx-get="/reviewQueue/approve">approve</button>
+    <button hx-get="/reviewQueue/deny">deny</button>
+
+</body>
+</html>

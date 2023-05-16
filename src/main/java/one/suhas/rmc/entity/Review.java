@@ -2,7 +2,7 @@ package one.suhas.rmc.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import one.suhas.rmc.enums.StarValue;
+import one.suhas.rmc.utils.StarValue;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

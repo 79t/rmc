@@ -2,6 +2,7 @@ package one.suhas.rmc.service;
 
 import one.suhas.rmc.entity.RMCClass;
 import one.suhas.rmc.entity.Review;
+import one.suhas.rmc.entity.TextReview;
 import one.suhas.rmc.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,8 @@ public class ClassService {
 
     public Set<Review> getClassReviews(long id) {
         return classRepository.findById(id).getReviews();
+    }
+    public Set<TextReview> getTextReviews(long id) {
+        return classRepository.findById(id).getTextReviews();
     }
 }
