@@ -1,6 +1,7 @@
 package one.suhas.rmc.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.github.cdimascio.dotenv.Dotenv;
 import one.suhas.rmc.entity.*;
 import one.suhas.rmc.repository.ClassRepository;
 import one.suhas.rmc.service.ReviewService;
@@ -23,7 +24,7 @@ import java.util.*;
 @RestController
 public class ReviewController {
 
-    private final String openaiApiKey = "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";
+    private final Dotenv dotenv = Dotenv.configure().directory(".").filename(".env").load();
     private final ReviewService reviewService;
     private final ClassRepository classRepository;
 
@@ -144,7 +145,7 @@ public class ReviewController {
         System.out.println("Start post");
         JsonNode jn = wc.post()
                 .uri(URI.create("https://api.openai.com/v1/completions"))
-                .header("Authorization", "Bearer " + openaiApiKey)
+                .header("Authorization", "Bearer " + dotenv.get("OPENAI_API_KEY"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(oar), OpenAIRequest.class)
                 .retrieve().bodyToMono(JsonNode.class).block();
