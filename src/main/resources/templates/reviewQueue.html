@@ -9,9 +9,10 @@
 
     <h1>Review Queue</h1>
     <h2 th:text="'Review from ' + ${#temporals.format(review.getCreatedDate(), 'MMM dd yyyy')}"></h2>
+    <h3 th:text="'Class: ' + ${review.getRmcClass().getClassName()}"></h3>
     <p th:text="'Review Text -' + ${review.getReviewText()}"></p>
-    <button hx-get="/reviewQueue/approve">approve</button>
-    <button hx-get="/reviewQueue/deny">deny</button>
+    <button onclick="alert('done')" hx-get="/reviewQueue/approve" hx-swap="none">approve</button>
+    <button onclick="alert('done')" hx-get="/reviewQueue/deny" hx-swap="none">deny</button>
 
 </body>
 </html>

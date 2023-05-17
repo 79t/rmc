@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>RMC - Submit Review</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1 th:text="'Submit rating for ' + ${the_class.getClassName()}"></h1>
-<form action="#" th:action="@{/reviewForm}" th:object="${review}" method="post">
+<h1 th:text="'Submit review for ' + ${the_class.getClassName()}"></h1>
+<form action="#" th:action="@{/textReviewForm}" th:object="${review}" method="post">
     <input type="hidden" th:field="*{rmcClassId}" />
     <label for="difficulty">Rate Difficulty (5 is the most difficult)</label>
     <select id="difficulty" name="difficulty" th:field="*{hard}">
@@ -44,6 +44,8 @@
         <option value="FiveStars">⭐⭐⭐⭐⭐</option>
     </select>
     <br>
+    <label for="review">Write your review here</label>
+    <textarea id="review" th:field="*{text}"></textarea>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>

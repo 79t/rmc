@@ -1,8 +1,6 @@
 package one.suhas.rmc.controller;
 
-import one.suhas.rmc.entity.RMCClass;
-import one.suhas.rmc.entity.Review;
-import one.suhas.rmc.entity.TextReview;
+import one.suhas.rmc.entity.*;
 import one.suhas.rmc.service.ClassService;
 import one.suhas.rmc.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,11 +70,31 @@ public class ClassController {
     @GetMapping("/view/classes/{class}/addReview")
     public ModelAndView addReview(@PathVariable("class") long id) {
         ModelAndView model = new ModelAndView("addReview");
-        RMCClass c = classService.getById(id);
-        Review r = new Review();
-        r.setRmcClass(c);
-        model.addObject("class", c);
+        ReviewSubmission r = new ReviewSubmission();
+        RMCClass cla = classService.getById(id);
+        r.setRmcClassId(cla.getId());
         model.addObject("review", r);
+        model.addObject("the_class", cla);
+        model.addObject("the_id", id);
+        return model;
+    }
+
+    @GetMapping("/view/classes/{class}/addTextReview")
+    public ModelAndView addTextReview(@PathVariable("class") long id) {
+        ModelAndView model = new ModelAndView("addTextReview");
+        TextReviewSubmission r = new TextReviewSubmission();
+        RMCClass cla = classService.getById(id);
+        r.setRmcClassId(cla.getId());
+        model.addObject("review", r);
+        model.addObject("the_class", cla);
+        model.addObject("the_id", id);
+        return model;
+    }
+
+    @GetMapping("/")
+    public ModelAndView index() {
+        ModelAndView model = new ModelAndView("index");
+        model.addObject("classes", classService.getAllClasses());
         return model;
     }
 

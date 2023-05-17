@@ -31,13 +31,17 @@ public class Review {
 
     @CreatedDate
     private LocalDateTime createdDate;
-    public Review(long id, RMCClass rmcClass,  StarValue interesting, StarValue hard, StarValue homework, StarValue exams) {
-        this.id = id;
+    public Review(RMCClass rmcClass,  StarValue interesting, StarValue hard, StarValue homework, StarValue exams) {
+//        this.id = id;
         this.rmcClass = rmcClass;
         this.interesting = interesting;
         this.hard = hard;
         this.homework = homework;
         this.exams = exams;
+    }
+
+    public String toString() {
+        return String.format("Review[RMCClass: ID=%d name=%s][h=%s][i=%s][d=%s][e=%s]", rmcClass.getId(), rmcClass.getClassName(), homework.name(), interesting.name(), hard.name(), exams.name());
     }
 
     public Review() {}

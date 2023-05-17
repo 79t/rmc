@@ -6,6 +6,7 @@
 </head>
 <body>
   <h1 th:text="'info for class' + ' ' + ${class.getClassName()}"></h1>
+  <a th:href="'/view/classes/'+${class.getId()}+'/addReview'">add your rating!</a>
   <h2>Ratings</h2>
   <div th:each="re: ${reviews}">
     <h3 th:text="'rating from ' + ${#temporals.format(re.getCreatedDate(), 'MMM dd yyyy')}"></h3>
