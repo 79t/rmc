@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <h1>GPT Review Writer</h1>
+    <form hx-post="/gptForm" hx-target="#result">
+        <label for="sc"> Select class </label>
+        <select id="sc" name="classId">
+            <option th:each="class : ${classes}" th:value="${class.getClassName()}" th:text="${class.getClassName()}"></option>
+        </select>
+        <br>
+
+        <label for="pros">List some pros of this class, separated by commas</label>
+        <input type="text" id="pros" name="pros">
+        <br>
+
+        <label for="cons">List some cons of this class, separated by commas</label>
+        <input type="text" id="cons" name="cons">
+
+        <br>
+        <button type="submit">Submit!</button>
+    </form>
+
+    <div id="result"></div>
+
+</body>
+</html>

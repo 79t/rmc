@@ -34,4 +34,8 @@ public class ClassService {
     public Set<TextReview> getTextReviews(long id) {
         return classRepository.findById(id).getTextReviews();
     }
+
+    public void deleteClass(long id) {
+        classRepository.deleteById(id);
+    }
 }

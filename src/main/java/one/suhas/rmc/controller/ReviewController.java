@@ -1,21 +1,29 @@
 package one.suhas.rmc.controller;
 
-import one.suhas.rmc.entity.Review;
-import one.suhas.rmc.entity.ReviewSubmission;
-import one.suhas.rmc.entity.TextReview;
-import one.suhas.rmc.entity.TextReviewSubmission;
+import com.fasterxml.jackson.databind.JsonNode;
+import one.suhas.rmc.entity.*;
 import one.suhas.rmc.repository.ClassRepository;
 import one.suhas.rmc.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.BodyInserter;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.Queue;
+import java.net.URI;
+import java.util.*;
 
 @RestController
 public class ReviewController {
+
+    private final String openaiApiKey = "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";
     private final ReviewService reviewService;
     private final ClassRepository classRepository;
 
@@ -107,6 +115,45 @@ public class ReviewController {
         reviewService.addReview(tr);
         return "Thank you for your submission! Your review has been added to the queue";
     }
+
+    @GetMapping("/gpt")
+    public ModelAndView gptPage() {
+        ModelAndView model = new ModelAndView("gpt");
+        model.addObject("classes", classRepository.findAll());
+        return model;
+    }
+
+    @PostMapping("/gptForm")
+    public String gptForm(GPTForm gptForm) {
+        WebClient wc = WebClient.create();
+        System.out.println(gptForm.getClassId());
+        String prompt = String.format("""
+                Please write a review for the class %s in the perspective of a student who has just finished the course. This review will be written based on a set of ratings, as well as some pros and cons. Do not break character while writing this review, it should always be in the perspective of the student. Use complete sentences and proper grammar.\s
+
+                Pros: %s
+                Cons: %s
+                Review:\s""", gptForm.getClassId(), gptForm.getPros(), gptForm.getCons());
+        OpenAIRequest oar = new OpenAIRequest();
+        oar.setPrompt(prompt);
+        oar.setMax_tokens(256);
+        oar.setModel("text-davinci-003");
+        oar.setFrequency_penalty(0);
+        oar.setPresence_penalty(0);
+        oar.setTemperature(0.7);
+        oar.setTop_p(1);
+        System.out.println("Start post");
+        JsonNode jn = wc.post()
+                .uri(URI.create("https://api.openai.com/v1/completions"))
+                .header("Authorization", "Bearer " + openaiApiKey)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(oar), OpenAIRequest.class)
+                .retrieve().bodyToMono(JsonNode.class).block();
+        String review = jn.get("choices").get(0).get("text").toString();
+        String trimmedReview = review.replaceAll("\\n\\n", "");
+        return String.format("<h3>Your GPT Review</h3><p>%s</p>", trimmedReview);
+    }
+
+
 
 
 

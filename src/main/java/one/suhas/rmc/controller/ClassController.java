@@ -4,11 +4,8 @@ import one.suhas.rmc.entity.*;
 import one.suhas.rmc.service.ClassService;
 import one.suhas.rmc.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.annotation.ModelAndViewResolver;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,12 @@ public class ClassController {
     @GetMapping("/classes")
     public List<RMCClass> getAllClasses() {
         return classService.getAllClasses();
+    }
+
+    @DeleteMapping("/classes/{id}")
+    public String deleteClass(@PathVariable("id") long id) {
+        classService.deleteClass(id);
+        return "ok";
     }
 
 
