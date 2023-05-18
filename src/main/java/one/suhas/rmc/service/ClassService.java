@@ -38,4 +38,11 @@ public class ClassService {
     public void deleteClass(long id) {
         classRepository.deleteById(id);
     }
+
+    public void generateClasses() {
+        String[] classes = {"AP Chemistry", "AP Calculus AB", "AP Statistics", "AP CSA", "CSIII", "Drone Aviation", "AP Calculus BC", "AP Physics 1"};
+        for (String cl: classes) {
+            addClass(cl);
+        }
+    }
 }

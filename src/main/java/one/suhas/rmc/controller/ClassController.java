@@ -19,6 +19,12 @@ public class ClassController {
         this.classService = classService;
     }
 
+    @GetMapping("/generateClasses")
+    public ModelAndView generateClasses() {
+        classService.generateClasses();
+        return new ModelAndView("redirect:/");
+    }
+
     @GetMapping("/classes")
     public List<RMCClass> getAllClasses() {
         return classService.getAllClasses();
