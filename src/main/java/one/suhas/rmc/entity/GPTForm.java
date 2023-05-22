@@ -1,8 +1,22 @@
 package one.suhas.rmc.entity;
 
+/**
+ * A form submission for the /gpt page
+ */
 public class GPTForm {
+
+    /**
+     * The class that the user is submitting the review for
+     */
     private String classId;
+    /**
+     * The pros of the class
+     */
     private String pros;
+
+    /**
+     * The cons of the class
+     */
     private String cons;
 
     public String getClassId() {

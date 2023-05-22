@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"one.suhas.rmc"},{"l":"one.suhas.rmc.controller"},{"l":"one.suhas.rmc.entity"},{"l":"one.suhas.rmc.repository"},{"l":"one.suhas.rmc.service"},{"l":"one.suhas.rmc.utils"}];updateSearchResults();

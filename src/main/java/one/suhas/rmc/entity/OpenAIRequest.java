@@ -1,5 +1,8 @@
 package one.suhas.rmc.entity;
 
+/**
+ * A class to contain a request to the OpenAI API. All of these parameters are directly taken from the OpenAI response body to allow for it's encoding to JSON.
+ */
 public class OpenAIRequest {
     private String model;
     private String prompt;

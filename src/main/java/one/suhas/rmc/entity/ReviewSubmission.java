@@ -2,6 +2,12 @@ package one.suhas.rmc.entity;
 
 import one.suhas.rmc.utils.StarValue;
 
+/**
+ * A class to contain the form data for when a user submits a review. Since HTML forms cannot contain java objects,
+ * this is used as an intermediary between the HTML form and the Review entity object.
+ * @see Review
+ */
+
 public class ReviewSubmission {
     private StarValue hard;
     private StarValue interesting;
